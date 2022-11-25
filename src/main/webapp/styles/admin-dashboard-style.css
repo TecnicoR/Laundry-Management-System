@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #59C1BD;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.navbar {
+    /* border: 2px solid black; */
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.menu {
+    /* border: 1px solid black; */
+    height: 100%;
+    width: 70%;
+    display: flex;
+    align-items: center;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+}
+
+.navbar li {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.navbar li a {
+    font-family: 'Roboto Slab', serif;
+    text-decoration: none;
+    padding: 5px;
+    color: black;
+    border: 1px solid blue;
+    font-weight: bold;
+
+}
+
+.navbar li a:hover {
+    background-color: #59C1BD;
+    color: white;
+    font-weight: lighter;
+}
+
+/* Navbar style over */
+
+
+/* Bottom Table */
+
+.main {
+    display: flex;
+    justify-content: space-around;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.main table {
+    height: 30px;
+    border-collapse: collapse;
+}
+
+.main table thead {
+    background-color: rgba(255, 255, 255, 0.471);
+}
+
+.main table th {
+    font-weight: bolder;
+    font-size: 22px;
+}
+
+.main table td,
+th {
+    border: 1px solid black;
+    padding: 20px;
+}
+
+.main table td {
+    font-size: 18px;
+}
+
+.main table caption {
+    font-size: 30px;
+    font-weight: bolder;
+    margin-bottom: 10px;
+    /* font-family: 'Roboto Slab', serif; */
+}
+
+.head {
+    /* border: 2px solid black; */
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}
+
+.box {
+    height: 150px;
+    width: 300px;
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.up{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid black;
+    height: 50%;
+}
+.down{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+    height: 50%;
+}
+.green{
+    background-color: rgb(63, 213, 63);
+}
+.orange{
+    background-color: orange;
+}
+.cyan{
+    background-color: cyan
+}
+.yellow{
+    background-color: yellow;
+}
+.tiles{
+    /* border: 2px solid black; */
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
