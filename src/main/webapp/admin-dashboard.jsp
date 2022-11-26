@@ -1,3 +1,4 @@
+<%@ page import="com.laundry.model.Admin" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +9,17 @@
     <link rel="stylesheet" href="./styles/admin-dashboard-style.css">
     <title>Admin - Dashboard</title>
 </head>
-
+<%
+    response.setHeader("cache-control","no-cache,no-store,must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma","no-cache"); //HTTP 1.0
+    response.setHeader("Expires","0"); //proxy
+    String name = "";
+    if(session.getAttribute("user") == null){
+        response.sendRedirect("login-staff.jsp");
+    }else{
+        name = ((Admin)session.getAttribute("user")).getName();
+    }
+%>
 <body>
     <div class="navbar">
         <div class="title">
@@ -24,7 +35,9 @@
             </ul> -->
         </div>
         <div class="profile">
+            <h3><a href="#"><%=name%></a> </h3>
             <a href="#"><img src="./images/user.png" height="30px" alt=""></a>
+            <a id="logout-a" href="logout"><img src="./images/exit.png" height="20px" title="logout"></a>
         </div>
     </div>
 

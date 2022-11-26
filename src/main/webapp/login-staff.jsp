@@ -1,3 +1,4 @@
+<%@ page import="com.laundry.model.Admin" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,15 @@
     <link rel="stylesheet" href="./styles/style.css">
     <title>Login - LMS</title>
 </head>
+<%
+    response.setHeader("cache-control","no-cache,no-store,must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma","no-cache"); //HTTP 1.0
+    response.setHeader("Expires","0"); //proxy
+    if((Admin)session.getAttribute("user") != null){
+        response.sendRedirect("admin-dashboard.jsp");
+    }
+%>
+
 <body>
     <div class="main-form">
         <h2>Staff Login to LMS</h2>
