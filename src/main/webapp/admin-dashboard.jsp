@@ -1,4 +1,7 @@
 <%@ page import="com.laundry.model.Admin" %>
+<%@ page import="com.laundry.repo.PriceChartRepo" %>
+<%@ page import="com.laundry.model.PriceChart" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -92,18 +95,32 @@
         </div>
     </div>
     <div class="main">
+        
         <table>
             <caption>Price Chart</caption>
             <thead>
                 <tr>
                     <th>Type of cloth</th>
                     <th>Price per unit</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
+                <%
+                    List<PriceChart> all = new PriceChartRepo().getAll();
+                    for (PriceChart priceChart : all) {
+                        System.out.println(priceChart);
+                %>
                 <tr>
-                    <td>Top wear ( men )</td>
-                    <td>20</td>
+                    <td><%=priceChart.getTypeOfCloth()%></td>
+                    <td><%=priceChart.getPrice()%></td>
+                    <td><a href="edit-price.jsp?id=<%=priceChart.getId()%>"><img src="./images/editing.png" alt="EDIT" height="30px"></a>&nbsp;<a href="delete-price?id=<%=priceChart.getId()%>"><img src="./images/delete.png" alt="DELETE" height="30px"></a></td>
+                </tr>
+                <%}%>
+                <tr>
+                    <td style="border: none"></td>
+                    <td style="border: none"></td>
+                    <td style="text-align: center"><a href="add-price.jsp"><img src="./images/add.png" alt="ADD" height="30px" ></a></td>
                 </tr>
             </tbody>
         </table>

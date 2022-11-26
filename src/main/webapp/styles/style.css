@@ -67,6 +67,7 @@ body {
     color: white;
     border: none;
     border-radius: 10px;
+    cursor: pointer;
 }
 .extra-links{
     margin-top: -20px;
