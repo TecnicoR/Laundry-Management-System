@@ -27,15 +27,15 @@
             </div>
             <div class="form-input">
                 <label for="email">email</label>
-                <input type="text" name="email" id="email" value="<%=user.getEmail()%>" placeholder="enter here">
+                <input type="email" name="email" id="email" value="<%=user.getEmail()%>" placeholder="enter here" required>
             </div>
             <div class="form-input">
                 <label for="phoneNumber">Phone number</label>
-                <input type="text" name="phoneNumber" id="phoneNumber" value="<%=user.getPhoneNumber()%>" placeholder="enter here">
+                <input type="text" name="phoneNumber" id="phoneNumber" value="<%=user.getPhoneNumber()%>" placeholder="enter here" pattern="[6789][0-9]{9}" required>
             </div>
             <div class="form-input">
                 <label for="password">Password</label>
-                <input type="text" name="password" id="password" placeholder="enter only to change or leave blank">
+                <input type="password" name="password" id="password" placeholder="enter only to change or leave blank">
             </div>
             <input type="hidden" name="id" value="<%=user.getId()%>">
             <div class="form-input">

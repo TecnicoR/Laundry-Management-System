@@ -31,11 +31,11 @@
         <form action="user-login" method="post">
             <div class="form-input">
                 <label for="username">Username</label>
-                <input type="text" name="username" id="username" placeholder="enter here" autofocus required>
+                <input type="email" name="username" id="username" placeholder="enter here" autofocus required>
             </div>
             <div class="form-input">
                 <label for="password">Password</label>
-                <input type="text" name="password" id="password" placeholder="enter here">
+                <input type="password" name="password" id="password" placeholder="enter here" required>
             </div>
             <div class="form-input">
                 <input type="submit" value="login">

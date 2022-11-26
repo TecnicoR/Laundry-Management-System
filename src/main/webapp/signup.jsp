@@ -13,19 +13,19 @@
         <form action="user-signup" method="post">
             <div class="form-input">
                 <label for="name">Name</label>
-                <input type="text" name="name" id="name" placeholder="enter here" autofocus>
+                <input type="text" name="name" id="name" placeholder="enter here" required autofocus>
             </div>
             <div class="form-input">
                 <label for="email">email</label>
-                <input type="text" name="email" id="email"  placeholder="enter here">
+                <input type="email" name="email" id="email"  placeholder="enter here" required>
             </div>
             <div class="form-input">
-                <label for="phoneNumber">Phone number</label>
-                <input type="text" name="phoneNumber" id="phoneNumber"  placeholder="enter here">
+                <label for="phoneNumber" >Phone number</label>
+                <input type="text" name="phoneNumber" id="phoneNumber"  placeholder="enter here" required pattern="[6789][0-9]{9}">
             </div>
             <div class="form-input">
                 <label for="password">Password</label>
-                <input type="text" name="password" id="password"  placeholder="enter here">
+                <input type="password" name="password" id="password"  placeholder="enter here" required>
             </div>
             <div class="form-input">
                 <input type="submit" value="register">
