@@ -12,7 +12,7 @@
 <body>
     <div class="main-form">
         <h2>User Login to LMS</h2>
-        <form action="#">
+        <form action="user-login" method="post">
             <div class="form-input">
                 <label for="username">Username</label>
                 <input type="text" name="username" id="username" placeholder="enter here" autofocus required>
@@ -30,7 +30,7 @@
                 <a href="#">forgot password</a>
                 <a href="./signup.jsp">Signup</a>
             </div>
-            <a class="login-as-staff" href="./login-staff.html">login as staff --></a>
+            <a class="login-as-staff" href="./login-staff.jsp">login as staff --></a>
         </div>
     </div>
 </body>

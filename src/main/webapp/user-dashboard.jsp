@@ -1,3 +1,4 @@
+<%@ page import="com.laundry.model.User" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +25,7 @@
             </ul>
         </div>
         <div class="profile">
-            <h3><a href="#">Rabinarayan Patra</a> </h3>
+            <h3><a href="#"><%=((User)session.getAttribute("user")).getName()%></a> </h3>
             <a href="#"><img src="./images/user.png" height="30px" title="visit profile" alt=""></a>
             <a id="logout-a" href="#"><img src="./images/exit.png" height="20px" title="logout"></a>
         </div>

@@ -10,7 +10,7 @@
 <body>
     <div class="main-form">
         <h2>Staff Login to LMS</h2>
-        <form action="#">
+        <form action="admin-login" method="post">
             <div class="form-input">
                 <label for="email">Email</label>
                 <input type="text" name="email" id="email" placeholder="enter here" autofocus required>
@@ -24,8 +24,7 @@
             </div>
         </form>
         <div class="extra-links">
-            <a href="#">forgot password</a>
-            <a href="/login.html">login as user</a>
+            <a href="./login.jsp">login as user</a>
         </div>
     </div>
 </body>
