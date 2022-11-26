@@ -30,17 +30,18 @@ public class UserSignupAction extends HttpServlet {
         if (userRepo.getByEmail(email) != null) {
             req.getSession().setAttribute("error", "Email already registered");
             resp.sendRedirect("signup.jsp");
-        }
-        userRepo.create(user);
-        user = userRepo.getByEmail(user.getEmail());
-
-        if (user != null) {
-            req.getSession().setAttribute("user", user);
-            req.getSession().setAttribute("success", "Registered Successfully");
-            resp.sendRedirect("user-dashboard.jsp");
         } else {
-            req.getSession().setAttribute("error", "Could not register, try again");
-            resp.sendRedirect("signup.jsp");
+            userRepo.create(user);
+            user = userRepo.getByEmail(user.getEmail());
+
+            if (user != null) {
+                req.getSession().setAttribute("user", user);
+                req.getSession().setAttribute("success", "Registered Successfully");
+                resp.sendRedirect("user-dashboard.jsp");
+            } else {
+                req.getSession().setAttribute("error", "Could not register, try again");
+                resp.sendRedirect("signup.jsp");
+            }
         }
     }
 }
