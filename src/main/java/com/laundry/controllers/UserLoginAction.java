@@ -1,7 +1,7 @@
-package com.library.controllers;
+package com.laundry.controllers;
 
-import com.library.model.User;
-import com.library.repo.UserRepo;
+import com.laundry.model.User;
+import com.laundry.repo.UserRepo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

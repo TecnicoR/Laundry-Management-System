@@ -24,7 +24,9 @@
             </ul>
         </div>
         <div class="profile">
-            <a href="#"><img src="./images/user.png" height="30px" alt=""></a>
+            <h3><a href="#">Rabinarayan Patra</a> </h3>
+            <a href="#"><img src="./images/user.png" height="30px" title="visit profile" alt=""></a>
+            <a id="logout-a" href="#"><img src="./images/exit.png" height="20px" title="logout"></a>
         </div>
     </div>
     <div class="main">

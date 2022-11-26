@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="./styles/style.css">
     <title>Login - LMS</title>
 </head>
 <body>
@@ -12,8 +12,8 @@
         <h2>Staff Login to LMS</h2>
         <form action="#">
             <div class="form-input">
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username" placeholder="enter here" autofocus required>
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" placeholder="enter here" autofocus required>
             </div>
             <div class="form-input">
                 <label for="password">Password</label>

@@ -1,4 +1,4 @@
-package com.library.repo;
+package com.laundry.repo;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,6 +1,6 @@
-package com.library.repo;
+package com.laundry.repo;
 
-import com.library.model.User;
+import com.laundry.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class UserRepo {
     private static final Connection connection = ConnectionProvider.getConnection();
-    private static final String CREATE = "INSERT INTO `user` (`name`, `email`, `phoneNumber`, `password`) VALUES (?,?,?,?');";
+    private static final String CREATE = "INSERT INTO user (name, email, phoneNumber, password) VALUES (?,?,?,?)";
     private static final String GET_BY_EMAIL = "select * from user where email = ?";
 
 

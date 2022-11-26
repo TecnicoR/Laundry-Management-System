@@ -73,8 +73,18 @@ body {
     padding: 30px;
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
+}
+.extra-links div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.login-as-staff{
+    margin-top: 10px;
+    font-size: small;
 }
 h2{
     margin-top: 20px;

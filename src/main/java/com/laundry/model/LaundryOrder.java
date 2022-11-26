@@ -1,4 +1,4 @@
-package com.library.model;
+package com.laundry.model;
 
 import lombok.Data;
 
