@@ -31,23 +31,23 @@ public class UserRepo {
         return null;
     }
 
-    public User getByEmail(String email){
+    public User getByEmail(String email) {
         assert connection != null;
         PreparedStatement preparedStatement;
-        try{
+        try {
             preparedStatement = Objects.requireNonNull(connection).prepareStatement(GET_BY_EMAIL);
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()) {
+            if (resultSet.next()) {
                 User user = new User();
+                user.setId(resultSet.getInt("id"));
                 user.setName(resultSet.getString("name"));
                 user.setEmail(resultSet.getString("email"));
                 user.setPhoneNumber(resultSet.getString("phoneNumber"));
                 user.setPassword(resultSet.getString("password"));
                 return user;
             }
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;

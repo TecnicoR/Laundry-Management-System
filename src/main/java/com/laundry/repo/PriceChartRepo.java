@@ -17,6 +17,7 @@ public class PriceChartRepo {
     private static final String DELETE = "delete from priceChart where id = ?";
     private static final String GET_BY_ID = "select * from priceChart where id = ?";
     private static final String UPDATE = "update priceChart set typeOfCloth = ?, price = ? WHERE id = ?";
+    private static final String GET_PRICE_BY_TYPE = "select price from priceChart where typeOfCloth = ?";
 
     public PriceChart create(PriceChart priceChart) {
         assert connection != null;
@@ -53,6 +54,7 @@ public class PriceChartRepo {
         }
         return priceCharts;
     }
+
 
     public Boolean delete(Integer id) {
         assert connection != null;
@@ -106,5 +108,20 @@ public class PriceChartRepo {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public Integer getPriceByTypeOfCloth(String typeOfCloth) {
+        assert connection != null;
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement(GET_PRICE_BY_TYPE);
+            preparedStatement.setString(1, typeOfCloth);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next())
+                return Integer.parseInt(resultSet.getString("price"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

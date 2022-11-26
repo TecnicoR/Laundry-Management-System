@@ -36,7 +36,7 @@
     </div>
     <div class="menu">
         <ul>
-            <li><a href="#">Request Service</a></li>
+            <li><a href="./new-requests.jsp">Request Service</a></li>
         </ul>
     </div>
     <div class="profile">
@@ -59,7 +59,6 @@
         <%
             List<PriceChart> all = new PriceChartRepo().getAll();
             for (PriceChart priceChart : all) {
-                System.out.println(priceChart);
         %>
         <tr>
             <td><%=priceChart.getTypeOfCloth()%></td>

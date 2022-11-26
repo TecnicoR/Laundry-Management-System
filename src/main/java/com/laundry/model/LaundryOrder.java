@@ -15,5 +15,6 @@ public class LaundryOrder {
     private LaundryOrderStatus status;
     private LocalDate orderDate;
     private LocalDate finishDate;
+    private Integer amount;
 
 }

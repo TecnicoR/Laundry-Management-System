@@ -114,24 +114,27 @@
                 <%
                     List<PriceChart> all = new PriceChartRepo().getAll();
                     for (PriceChart priceChart : all) {
-                        System.out.println(priceChart);
+
                 %>
                 <tr>
                     <td><%=priceChart.getTypeOfCloth()%></td>
                     <td><%=priceChart.getPrice()%></td>
-                    <td><a href="edit-price.jsp?id=<%=priceChart.getId()%>"><img src="./images/editing.png" alt="EDIT" height="30px"></a>&nbsp;<a href="delete-price?id=<%=priceChart.getId()%>"><img src="./images/delete.png" alt="DELETE" height="30px"></a></td>
+                    <td><a href="edit-price.jsp?id=<%=priceChart.getId()%>"><img src="./images/editing.png" alt="EDIT" height="30px"></a>
+<%--                        <a href="delete-price?id=<%=priceChart.getId()%>"><img src="./images/delete.png" alt="DELETE" height="30px"></a>--%>
+                    </td>
                 </tr>
                 <%}%>
-                <tr>
-                    <td style="border: none"></td>
-                    <td style="border: none"></td>
-                    <td style="text-align: center"><a href="add-price.jsp"><img src="./images/add.png" alt="ADD" height="30px" ></a></td>
-                </tr>
+<%--                <tr>--%>
+<%--                    <td style="border: none"></td>--%>
+<%--                    <td style="border: none"></td>--%>
+<%--                    <td style="text-align: center"><a href="add-price.jsp"><img src="./images/add.png" alt="ADD" height="30px" ></a></td>--%>
+<%--                </tr>--%>
             </tbody>
         </table>
 
         <!-- <img src="./images/laundry.png" height="500px" alt=""> -->
     </div>
+    <br><br><br><br>
 </body>
 
 </html>

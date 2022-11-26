@@ -17,9 +17,7 @@
         response.sendRedirect("login-staff.jsp");
     }
     Integer id = Integer.parseInt(request.getParameter("id"));
-    System.out.println(id);
     PriceChart priceChart = new PriceChartRepo().getById(id);
-    System.out.println(priceChart);
 %>
 
 <body>
@@ -28,11 +26,11 @@
         <form action="edit-price" method="post">
             <div class="form-input">
                 <label for="typeOfCloth">Type Of Cloth</label>
-                <input type="text" name="typeOfCloth" value="<%=priceChart.getTypeOfCloth()%>" id="typeOfCloth" placeholder="enter here" autofocus required>
+                <input type="text" name="typeOfCloth" value="<%=priceChart.getTypeOfCloth()%>" id="typeOfCloth" placeholder="enter here" required readonly>
             </div>
             <div class="form-input">
                 <label for="price">Price</label>
-                <input type="text" name="price" value="<%=priceChart.getPrice()%>" id="price" placeholder="enter here" required>
+                <input type="text" name="price" value="<%=priceChart.getPrice()%>" id="price" placeholder="enter here" autofocus required>
             </div>
             <input type="hidden" name="id" value="<%=priceChart.getId()%>">
             <div class="form-input">

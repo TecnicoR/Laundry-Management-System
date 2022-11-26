@@ -21,7 +21,7 @@
             </div>
             <div class="form-input">
                 <label for="phoneNumber">Phone number</label>
-                <input type="text" name="phoneNumber" id="phoneNumber"  placeholder="enter here">
+                <input type="text" name="email" id="phoneNumber"  placeholder="enter here">
             </div>
             <div class="form-input">
                 <label for="password">Password</label>
