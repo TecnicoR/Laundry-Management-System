@@ -6,6 +6,9 @@ import com.laundry.model.LaundryOrder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LaundryOrderRepo {
     private static final Connection connection = ConnectionProvider.getConnection();
@@ -13,7 +16,8 @@ public class LaundryOrderRepo {
     private static final String COUNT_BY_STATUS = "select count(*) from laundryOrder where status = ?";
     private static final String COUNT_BY_STATUS_USER_ID = "select count(*) from laundryOrder where status = ? and userId = ?";
     private static final String CREATE = "insert into laundryOrder (userName, userId, numberOfCloths, clothItems, status, orderDate, amount) VALUES (?,?,?,?,?,?,?)";
-
+    private static final String GET_BY_STATUS_USER_ID = "select * from laundryOrder where status = ? and userId = ?";
+    private static final String GET_BY_STATUS = "select * from laundryOrder where status = ?";
     public Integer countByStatus(LaundryOrderStatus laundryOrderStatus) {
         assert connection != null;
         PreparedStatement preparedStatement;
@@ -70,5 +74,60 @@ public class LaundryOrderRepo {
         return null;
     }
 
+    public List<LaundryOrder> getAllByStatusAndUserId(LaundryOrderStatus laundryOrderStatus, Integer userId) {
+        assert connection != null;
+        PreparedStatement preparedStatement;
+        List<LaundryOrder> laundryOrders = new ArrayList<>();
+        try {
+            preparedStatement = connection.prepareStatement(GET_BY_STATUS_USER_ID);
+            preparedStatement.setString(1, laundryOrderStatus.toString());
+            preparedStatement.setInt(2, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                LaundryOrder laundryOrder = new LaundryOrder();
+                laundryOrder.setId(resultSet.getInt("id"));
+                laundryOrder.setUserName(resultSet.getString("userName"));
+                laundryOrder.setUserId(resultSet.getInt("userId"));
+                laundryOrder.setNumberOfCloths(resultSet.getInt("numberOfCloths"));
+                laundryOrder.setStatus(Enum.valueOf(LaundryOrderStatus.class, resultSet.getString("status")));
+                laundryOrder.setOrderDate(LocalDate.parse(resultSet.getString("orderDate")));
+                if(resultSet.getString("finishDate") != null)
+                    laundryOrder.setFinishDate(LocalDate.parse(resultSet.getString("finishDate")));
+                laundryOrder.setClothItems(resultSet.getString("clothItems"));
+                laundryOrder.setAmount(resultSet.getInt("amount"));
+                laundryOrders.add(laundryOrder);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return laundryOrders;
+    }
 
+    public List<LaundryOrder> getAllByStatus(LaundryOrderStatus laundryOrderStatus) {
+        assert connection != null;
+        PreparedStatement preparedStatement;
+        List<LaundryOrder> laundryOrders = new ArrayList<>();
+        try {
+            preparedStatement = connection.prepareStatement(GET_BY_STATUS);
+            preparedStatement.setString(1, laundryOrderStatus.toString());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                LaundryOrder laundryOrder = new LaundryOrder();
+                laundryOrder.setId(resultSet.getInt("id"));
+                laundryOrder.setUserName(resultSet.getString("userName"));
+                laundryOrder.setUserId(resultSet.getInt("userId"));
+                laundryOrder.setNumberOfCloths(resultSet.getInt("numberOfCloths"));
+                laundryOrder.setStatus(Enum.valueOf(LaundryOrderStatus.class, resultSet.getString("status")));
+                laundryOrder.setOrderDate(LocalDate.parse(resultSet.getString("orderDate")));
+                if(resultSet.getString("finishDate") != null)
+                    laundryOrder.setFinishDate(LocalDate.parse(resultSet.getString("finishDate")));
+                laundryOrder.setClothItems(resultSet.getString("clothItems"));
+                laundryOrder.setAmount(resultSet.getInt("amount"));
+                laundryOrders.add(laundryOrder);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return laundryOrders;
+    }
 }

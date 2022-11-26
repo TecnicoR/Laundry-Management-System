@@ -5,15 +5,22 @@
 <%@ page import="com.laundry.repo.PriceChartRepo" %>
 <%@ page import="com.laundry.model.PriceChart" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.laundry.model.LaundryOrder" %>
 <!DOCTYPE html>
 <html lang="en">
 
+<%
+    String orderStatus = "";
+    if(request.getParameter("orderStatus") != null){
+        orderStatus = request.getParameter("orderStatus");
+    }
+%>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/admin-dashboard-style.css">
-    <title>Dashboard</title>
+    <title>All <%=orderStatus%> Orders</title>
 </head>
 <%
     String name = "";
@@ -58,23 +65,41 @@
 </div>
 <div class="main">
     <table>
-        <caption>Price Chart</caption>
+        <caption><%=orderStatus%> Chart</caption>
         <thead>
         <tr>
-            <th>Type of cloth</th>
-            <th>Price per unit</th>
+            <th>Id</th>
+            <th>User Name</th>
+            <th>No of Cloths</th>
+            <th>Cloth Items</th>
+            <th>Status</th>
+            <th>Order Date</th>
+            <th>Finish Date</th>
+            <th>Amount</th>
         </tr>
         </thead>
         <tbody>
         <%
-            List<PriceChart> all = new PriceChartRepo().getAll();
-            for (PriceChart priceChart : all) {
+            List<LaundryOrder> laundryOrders = laundryOrderRepo.getAllByStatusAndUserId(Enum.valueOf(LaundryOrderStatus.class, orderStatus), userId);
+            for (LaundryOrder laundryOrder : laundryOrders) {
         %>
         <tr>
-            <td><%=priceChart.getTypeOfCloth()%>
+            <td><%=laundryOrder.getId()%></td>
+            <td><%=laundryOrder.getUserName()%></td>
+            <td><%=laundryOrder.getNumberOfCloths()%></td>
+            <td><%=laundryOrder.getClothItems()%></td>
+            <td><%=laundryOrder.getStatus()%></td>
+            <td><%=laundryOrder.getOrderDate()%></td>
+            <td>
+                <%
+                    if(laundryOrder.getFinishDate() != null){
+                        out.print(laundryOrder.getFinishDate());
+                    }else {
+                        out.print("Not Defined");
+                    }
+                %>
             </td>
-            <td><%=priceChart.getPrice()%>
-            </td>
+            <td><%=laundryOrder.getAmount()%></td>
         </tr>
         <%}%>
         </tbody>
