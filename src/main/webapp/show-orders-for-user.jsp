@@ -11,8 +11,13 @@
 
 <%
     String orderStatus = "";
+    LaundryOrderStatus status = null;
     if(request.getParameter("orderStatus") != null){
         orderStatus = request.getParameter("orderStatus");
+        status = Enum.valueOf(LaundryOrderStatus.class, orderStatus);
+        if(orderStatus.contains("_"))
+            orderStatus = orderStatus.replace("_", " ");
+        orderStatus = orderStatus.substring(0,1).toUpperCase() + orderStatus.substring(1).toLowerCase();
     }
 %>
 <head>
@@ -39,7 +44,7 @@
 <body>
 <div class="navbar">
     <div class="title">
-        <h1>LaundryMS</h1>
+        <h1><a href="./user-dashboard.jsp">LaundryMS</a></h1>
     </div>
     <div class="menu">
         <ul>
@@ -57,15 +62,15 @@
         %>
     </div>
     <div class="profile">
-        <h3><a href="#"><%=name%>
+        <h3><a href="./update-profile.jsp"><%=name%>
         </a></h3>
-        <a href="#"><img src="./images/user.png" height="30px" title="visit profile" alt=""></a>
+        <a href="./update-profile.jsp"><img src="./images/user.png" height="30px" title="visit profile" alt=""></a>
         <a id="logout-a" href="logout"><img src="./images/exit.png" height="20px" title="logout"></a>
     </div>
 </div>
 <div class="main">
     <table>
-        <caption><%=orderStatus%> Chart</caption>
+        <caption><%=orderStatus%> orders</caption>
         <thead>
         <tr>
             <th>Id</th>
@@ -80,14 +85,14 @@
         </thead>
         <tbody>
         <%
-            List<LaundryOrder> laundryOrders = laundryOrderRepo.getAllByStatusAndUserId(Enum.valueOf(LaundryOrderStatus.class, orderStatus), userId);
+            List<LaundryOrder> laundryOrders = laundryOrderRepo.getAllByStatusAndUserId(status, userId);
             for (LaundryOrder laundryOrder : laundryOrders) {
         %>
         <tr>
             <td><%=laundryOrder.getId()%></td>
             <td><%=laundryOrder.getUserName()%></td>
             <td><%=laundryOrder.getNumberOfCloths()%></td>
-            <td><%=laundryOrder.getClothItems()%></td>
+            <td><%=laundryOrder.getClothItems().replace("[","").replace("]","")%></td>
             <td><%=laundryOrder.getStatus()%></td>
             <td><%=laundryOrder.getOrderDate()%></td>
             <td>

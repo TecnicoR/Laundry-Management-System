@@ -164,7 +164,11 @@ th {
     justify-content: space-between;
 }
 .title{
-    margin-left: 20px;
+ margin-left: 20px;
+}
+.title a{
+    text-decoration: none;
+    color: black;
 }
 .profile h3 a{
     color: black;

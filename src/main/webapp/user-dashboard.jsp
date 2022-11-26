@@ -32,7 +32,7 @@
 <body>
 <div class="navbar">
     <div class="title">
-        <h1>LaundryMS</h1>
+        <h1><a href="./user-dashboard.jsp">LaundryMS</a></h1>
     </div>
     <div class="menu">
         <ul>
@@ -50,9 +50,9 @@
         %>
     </div>
     <div class="profile">
-        <h3><a href="#"><%=name%>
+        <h3><a href="./update-profile.jsp"><%=name%>
         </a></h3>
-        <a href="#"><img src="./images/user.png" height="30px" title="visit profile" alt=""></a>
+        <a href="./update-profile.jsp"><img src="./images/user.png" height="30px" title="visit profile" alt=""></a>
         <a id="logout-a" href="logout"><img src="./images/exit.png" height="20px" title="logout"></a>
     </div>
 </div>

@@ -1,0 +1,59 @@
+<!-- <%@ page import="com.laundry.model.Admin" %>
+<%@ page import="com.laundry.repo.PriceChartRepo" %>
+<%@ page import="com.laundry.model.PriceChart" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.laundry.repo.LaundryOrderRepo" %>
+<%@ page import="com.laundry.enums.LaundryOrderStatus" %> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/admin-dashboard-style.css">
+    <link rel="stylesheet" href="./styles/my-profile-style.css">
+    <title>My Profile</title>
+</head>
+<!-- <%
+    String name = "";
+    if (session.getAttribute("user") == null) {
+        response.sendRedirect("login-staff.jsp");
+    } else {
+        name = ((Admin) session.getAttribute("user")).getName();
+    }
+
+    final LaundryOrderRepo laundryOrderRepo = new LaundryOrderRepo();
+    Integer newCount = laundryOrderRepo.countByStatus(LaundryOrderStatus.NEW);
+    Integer acceptedCount = laundryOrderRepo.countByStatus(LaundryOrderStatus.ACCEPTED);
+    Integer inProgressCount = laundryOrderRepo.countByStatus(LaundryOrderStatus.IN_PROGRESS);
+    Integer finishedCount = laundryOrderRepo.countByStatus(LaundryOrderStatus.FINISHED);
+%> -->
+<body>
+<div class="navbar">
+    <div class="title">
+        <h1><a href="./user-dashboard.jsp">LaundryMS</a></h1>
+    </div>
+    <div class="menu">
+        <!-- <%
+            if (session.getAttribute("error") != null) {
+                out.print("<p style='margin-left: 250px; font-size: large; font-weight: bold; color: red;'>" + session.getAttribute("error") + "</p>");
+                session.removeAttribute("error");
+            }
+            if (session.getAttribute("success") != null) {
+                out.print("<p style='margin-left: 250px; font-size: large; font-weight: bold; color: green;'>" + session.getAttribute("success") + "</p>");
+                session.removeAttribute("success");
+            }
+        %> -->
+    </div>
+    <div class="profile">
+        <h3><a href="#">hey
+        </a></h3>
+        <a href="#"><img src="./images/user.png" height="30px" alt=""></a>
+        <a id="logout-a" href="logout"><img src="./images/exit.png" height="20px" title="logout"></a>
+    </div>
+</div>
+
+</body>
+
+</html>

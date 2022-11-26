@@ -31,7 +31,7 @@
 <body>
 <div class="navbar">
     <div class="title">
-        <h1>LaundryMS</h1>
+        <h1><a href="./admin-dashboard.jsp">LaundryMS</a></h1>
     </div>
     <div class="menu">
         <%

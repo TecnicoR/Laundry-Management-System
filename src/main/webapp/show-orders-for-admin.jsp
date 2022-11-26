@@ -9,8 +9,13 @@
 <html lang="en">
 <%
     String orderStatus = "";
-    if(request.getParameter("orderStatus") != null){
+    LaundryOrderStatus status = null;
+    if (request.getParameter("orderStatus") != null) {
         orderStatus = request.getParameter("orderStatus");
+        status = Enum.valueOf(LaundryOrderStatus.class, orderStatus);
+        if (orderStatus.contains("_"))
+            orderStatus = orderStatus.replace("_", " ");
+        orderStatus = orderStatus.substring(0, 1).toUpperCase() + orderStatus.substring(1).toLowerCase();
     }
 %>
 <head>
@@ -18,7 +23,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/admin-dashboard-style.css">
-    <title>All <%=orderStatus%> Orders</title>
+    <title>All <%=orderStatus%> orders</title>
 </head>
 <%
     String name = "";
@@ -37,7 +42,7 @@
 <body>
 <div class="navbar">
     <div class="title">
-        <h1>LaundryMS</h1>
+        <h1><a href="./admin-dashboard.jsp">LaundryMS</a></h1>
     </div>
     <div class="menu">
         <%
@@ -52,10 +57,10 @@
         %>
     </div>
     <div class="profile">
-        <h3><a href="#"><%=name%>
+        <h3><a href=""><%=name%>
         </a></h3>
-        <a href="#"><img src="./images/user.png" height="30px" alt=""></a>
-        <a id="logout-a" href="logout"><img src="./images/exit.png" height="20px" title="logout"></a>
+        <a href=""><img src="./images/user.png" height="30px" alt=""></a>
+        <a id="logout-a" href="logout"><img src="./images/exit.png" height="20px" title="logout" alt="logout"></a>
     </div>
 </div>
 
@@ -69,7 +74,8 @@
             <div class="l-down">
                 <a href="show-orders-for-admin.jsp?orderStatus=NEW">View Details</a>
             </div>
-            <a href="show-orders-for-admin.jsp?orderStatus=NEW"><img src="./images/greater-than-symbol.png" height="20px" alt=""></a>
+            <a href="show-orders-for-admin.jsp?orderStatus=NEW"><img src="./images/greater-than-symbol.png"
+                                                                     height="20px" alt=""></a>
         </div>
     </div>
     <div class="box yellow">
@@ -81,7 +87,8 @@
             <div class="l-down">
                 <a href="show-orders-for-admin.jsp?orderStatus=ACCEPTED">View Details</a>
             </div>
-            <a href="show-orders-for-admin.jsp?orderStatus=ACCEPTED"><img src="./images/greater-than-symbol.png" height="20px" alt=""></a>
+            <a href="show-orders-for-admin.jsp?orderStatus=ACCEPTED"><img src="./images/greater-than-symbol.png"
+                                                                          height="20px" alt=""></a>
         </div>
     </div>
     <div class="box orange">
@@ -93,7 +100,8 @@
             <div class="l-down">
                 <a href="show-orders-for-admin.jsp?orderStatus=IN_PROGRESS">View Details</a>
             </div>
-            <a href="show-orders-for-admin.jsp?orderStatus=IN_PROGRESS"><img src="./images/greater-than-symbol.png" height="20px" alt=""></a>
+            <a href="show-orders-for-admin.jsp?orderStatus=IN_PROGRESS"><img src="./images/greater-than-symbol.png"
+                                                                             height="20px" alt=""></a>
         </div>
     </div>
     <div class="box cyan">
@@ -105,14 +113,15 @@
             <div class="l-down">
                 <a href="show-orders-for-admin.jsp?orderStatus=FINISHED">View Details</a>
             </div>
-            <a href="show-orders-for-admin.jsp?orderStatus=FINISHED"><img src="./images/greater-than-symbol.png" height="20px" alt=""></a>
+            <a href="show-orders-for-admin.jsp?orderStatus=FINISHED"><img src="./images/greater-than-symbol.png"
+                                                                          height="20px" alt=""></a>
         </div>
     </div>
 </div>
 <div class="main">
 
     <table>
-        <caption>Price Chart</caption>
+        <caption><%=orderStatus%> orders</caption>
         <thead>
         <th>Id</th>
         <th>User Name</th>
@@ -126,29 +135,46 @@
         </thead>
         <tbody>
         <%
-            List<LaundryOrder> laundryOrders = laundryOrderRepo.getAllByStatus(Enum.valueOf(LaundryOrderStatus.class, orderStatus));
+            List<LaundryOrder> laundryOrders = laundryOrderRepo.getAllByStatus(status);
             for (LaundryOrder laundryOrder : laundryOrders) {
         %>
         <tr>
-            <td><%=laundryOrder.getId()%></td>
-            <td><%=laundryOrder.getUserName()%></td>
-            <td><%=laundryOrder.getNumberOfCloths()%></td>
-            <td><%=laundryOrder.getClothItems()%></td>
-            <td><%=laundryOrder.getStatus()%></td>
-            <td><%=laundryOrder.getOrderDate()%></td>
+            <td><%=laundryOrder.getId()%>
+            </td>
+            <td><%=laundryOrder.getUserName()%>
+            </td>
+            <td><%=laundryOrder.getNumberOfCloths()%>
+            </td>
+            <td><%=laundryOrder.getClothItems().replace("[", "").replace("]", "")%>
+            </td>
+            <td><%=laundryOrder.getStatus()%>
+            </td>
+            <td><%=laundryOrder.getOrderDate()%>
+            </td>
             <td>
                 <%
-                    if(laundryOrder.getFinishDate() != null){
+                    if (laundryOrder.getFinishDate() != null) {
                         out.print(laundryOrder.getFinishDate());
-                    }else {
+                    } else {
                         out.print("Not Defined");
                     }
                 %>
             </td>
-            <td><%=laundryOrder.getAmount()%></td>
-            <td>
-                <%--                        <a href="delete-price?id=<%=priceChart.getId()%>"><img src="./images/delete.png" alt="DELETE" height="30px"></a>--%>
+            <td><%=laundryOrder.getAmount()%>
             </td>
+            <%
+                if (!laundryOrder.getStatus().equals(LaundryOrderStatus.FINISHED)) {
+            %>
+            <td>
+                <a href="next-step-of-laundry-order?id=<%=laundryOrder.getId()%>"><img src="./images/arrow.png"
+                                                                                       alt="Next Step" title="Next Step"
+                                                                                       height="30px"></a>
+            </td>
+            <%
+            } else {
+            %>
+            <td>Completed</td>
+            <%}%>
         </tr>
         <%}%>
         <%--                <tr>--%>

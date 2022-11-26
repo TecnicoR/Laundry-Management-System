@@ -43,7 +43,7 @@
         </form>
         <div class="extra-links">
             <div>
-                <a href="#">forgot password</a>
+<%--                <a href="#">forgot password</a>--%>
                 <a href="./signup.jsp">Signup</a>
             </div>
             <a class="login-as-staff" href="./login-staff.jsp">login as staff --></a>
