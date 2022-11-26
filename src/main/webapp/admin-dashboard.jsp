@@ -2,6 +2,8 @@
 <%@ page import="com.laundry.repo.PriceChartRepo" %>
 <%@ page import="com.laundry.model.PriceChart" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.laundry.repo.LaundryOrderRepo" %>
+<%@ page import="com.laundry.enums.LaundryOrderStatus" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,15 +15,18 @@
     <title>Admin - Dashboard</title>
 </head>
 <%
-    response.setHeader("cache-control","no-cache,no-store,must-revalidate"); //HTTP 1.1
-    response.setHeader("Pragma","no-cache"); //HTTP 1.0
-    response.setHeader("Expires","0"); //proxy
     String name = "";
     if(session.getAttribute("user") == null){
         response.sendRedirect("login-staff.jsp");
     }else{
         name = ((Admin)session.getAttribute("user")).getName();
     }
+
+    final LaundryOrderRepo laundryOrderRepo = new LaundryOrderRepo();
+    Integer newCount = laundryOrderRepo.countByStatus(LaundryOrderStatus.NEW);
+    Integer acceptedCount = laundryOrderRepo.countByStatus(LaundryOrderStatus.ACCEPTED);
+    Integer inProgressCount = laundryOrderRepo.countByStatus(LaundryOrderStatus.IN_PROGRESS);
+    Integer finishedCount = laundryOrderRepo.countByStatus(LaundryOrderStatus.FINISHED);
 %>
 <body>
     <div class="navbar">
@@ -47,7 +52,7 @@
     <div class="head">
         <div class="box green">
             <div class="up">
-                New Requests
+                <%=newCount%> &nbsp; New Requests
             </div>
 
             <div class="down">
@@ -59,7 +64,7 @@
         </div>
         <div class="box yellow">
             <div class="up">
-                Accept
+                <%=acceptedCount%> &nbsp; Accepted
             </div>
 
             <div class="down">
@@ -71,7 +76,7 @@
         </div>
         <div class="box orange">
             <div class="up">
-                In Progress
+                <%=inProgressCount%> &nbsp; In Progress
             </div>
 
             <div class="down">
@@ -83,7 +88,7 @@
         </div>
         <div class="box cyan">
             <div class="up">
-                Finish
+                <%=finishedCount%> &nbsp; Finished
             </div>
 
             <div class="down">

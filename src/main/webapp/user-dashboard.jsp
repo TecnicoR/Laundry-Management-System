@@ -1,5 +1,10 @@
 <%@ page import="com.laundry.model.User" %>
 <%@ page import="java.util.Objects" %>
+<%@ page import="com.laundry.repo.LaundryOrderRepo" %>
+<%@ page import="com.laundry.enums.LaundryOrderStatus" %>
+<%@ page import="com.laundry.repo.PriceChartRepo" %>
+<%@ page import="com.laundry.model.PriceChart" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,79 +16,85 @@
     <title>Dashboard</title>
 </head>
 <%
-    response.setHeader("cache-control","no-cache,no-store,must-revalidate"); //HTTP 1.1
-    response.setHeader("Pragma","no-cache"); //HTTP 1.0
-    response.setHeader("Expires","0"); //proxy
     String name = "";
-    if(session.getAttribute("user") == null){
+    Integer userId = 0;
+    if (session.getAttribute("user") == null) {
         response.sendRedirect("login.jsp");
-    }else{
-        name = ((User) session.getAttribute("user")).getName();
+    } else {
+        User user = (User) session.getAttribute("user");
+        name = user.getName();
+        userId = user.getId();
     }
+    final LaundryOrderRepo laundryOrderRepo = new LaundryOrderRepo();
+    Integer inProgressCount = laundryOrderRepo.countByStatusAndUserId(LaundryOrderStatus.IN_PROGRESS, userId);
+    Integer finishedCount = laundryOrderRepo.countByStatusAndUserId(LaundryOrderStatus.FINISHED, userId);
 %>
 <body>
-    <div class="navbar">
-        <div class="title">
-            <h1>LaundryMS</h1>
-        </div>
-        <div class="menu">
-            <ul>
-             <li><a href="#">Request Service</a></li>
-                 <!-- <li><a href="#">Pending Requests</a></li>
-                <li><a href="#">Accepted Requests</a></li>
-                <li><a href="#">Progress Requests</a></li>
-                <li><a href="#">Completed Requests</a></li> -->
-            </ul>
-        </div>
-        <div class="profile">
-            <h3><a href="#"><%=name%></a> </h3>
-            <a href="#"><img src="./images/user.png" height="30px" title="visit profile" alt=""></a>
-            <a id="logout-a" href="logout"><img src="./images/exit.png" height="20px" title="logout"></a>
-        </div>
+<div class="navbar">
+    <div class="title">
+        <h1>LaundryMS</h1>
     </div>
-    <div class="main">
-        <table>
-            <caption>Price Chart</caption>
-            <thead>
-                <tr>
-                    <th>Type of cloth</th>
-                    <th>Price per unit</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Top wear ( men )</td>
-                    <td>20</td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="tiles">
-            <div class="box orange">
-                <div class="up">
-                    In Progress
-                </div>
-    
-                <div class="down">
-                    <div class="l-down">
-                        View Details
-                    </div>
-                    <a href="#"><img src="./images/greater-than-symbol.png" height="20px" alt=""></a>
-                </div>
+    <div class="menu">
+        <ul>
+            <li><a href="#">Request Service</a></li>
+        </ul>
+    </div>
+    <div class="profile">
+        <h3><a href="#"><%=name%>
+        </a></h3>
+        <a href="#"><img src="./images/user.png" height="30px" title="visit profile" alt=""></a>
+        <a id="logout-a" href="logout"><img src="./images/exit.png" height="20px" title="logout"></a>
+    </div>
+</div>
+<div class="main">
+    <table>
+        <caption>Price Chart</caption>
+        <thead>
+        <tr>
+            <th>Type of cloth</th>
+            <th>Price per unit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%
+            List<PriceChart> all = new PriceChartRepo().getAll();
+            for (PriceChart priceChart : all) {
+                System.out.println(priceChart);
+        %>
+        <tr>
+            <td><%=priceChart.getTypeOfCloth()%></td>
+            <td><%=priceChart.getPrice()%></td>
+        </tr>
+        <%}%>
+        </tbody>
+    </table>
+    <div class="tiles">
+        <div class="box orange">
+            <div class="up">
+                <%=inProgressCount%> &nbsp; In Progress
             </div>
-            <div class="box cyan">
-                <div class="up">
-                    Finished
+
+            <div class="down">
+                <div class="l-down">
+                    View Details
                 </div>
-    
-                <div class="down">
-                    <div class="l-down">
-                        View Details
-                    </div>
-                    <a href="#"><img src="./images/greater-than-symbol.png" height="20px" alt=""></a>
-                </div>
+                <a href="#"><img src="./images/greater-than-symbol.png" height="20px" alt=""></a>
             </div>
         </div>
+        <div class="box cyan">
+            <div class="up">
+                <%=finishedCount%> &nbsp; Finished
+            </div>
+
+            <div class="down">
+                <div class="l-down">
+                    View Details
+                </div>
+                <a href="#"><img src="./images/greater-than-symbol.png" height="20px" alt=""></a>
+            </div>
+        </div>
     </div>
+</div>
 </body>
 
 </html>

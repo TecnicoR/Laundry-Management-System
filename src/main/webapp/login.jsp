@@ -10,9 +10,6 @@
     <title>Login - LMS</title>
 </head>
 <%
-    response.setHeader("cache-control","no-cache,no-store,must-revalidate"); //HTTP 1.1
-    response.setHeader("Pragma","no-cache"); //HTTP 1.0
-    response.setHeader("Expires","0"); //proxy
     if((User)session.getAttribute("user") != null){
         response.sendRedirect("user-dashboard.jsp");
     }
