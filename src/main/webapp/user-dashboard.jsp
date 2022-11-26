@@ -38,6 +38,16 @@
         <ul>
             <li><a href="./new-requests.jsp">Request Service</a></li>
         </ul>
+        <%
+            if (session.getAttribute("error") != null) {
+                out.print("<p style='margin-left: 250px; font-size: large; font-weight: bold; color: red;'>" + session.getAttribute("error") + "</p>");
+                session.removeAttribute("error");
+            }
+            if (session.getAttribute("success") != null) {
+                out.print("<p style='margin-left: 250px; font-size: large; font-weight: bold; color: green;'>" + session.getAttribute("success") + "</p>");
+                session.removeAttribute("success");
+            }
+        %>
     </div>
     <div class="profile">
         <h3><a href="#"><%=name%>
@@ -61,8 +71,10 @@
             for (PriceChart priceChart : all) {
         %>
         <tr>
-            <td><%=priceChart.getTypeOfCloth()%></td>
-            <td><%=priceChart.getPrice()%></td>
+            <td><%=priceChart.getTypeOfCloth()%>
+            </td>
+            <td><%=priceChart.getPrice()%>
+            </td>
         </tr>
         <%}%>
         </tbody>
@@ -75,7 +87,7 @@
 
             <div class="down">
                 <div class="l-down">
-                    View Details
+                    <a href="">View Details</a>
                 </div>
                 <a href="#"><img src="./images/greater-than-symbol.png" height="20px" alt=""></a>
             </div>
@@ -87,7 +99,7 @@
 
             <div class="down">
                 <div class="l-down">
-                    View Details
+                    <a href="">View Details</a>
                 </div>
                 <a href="#"><img src="./images/greater-than-symbol.png" height="20px" alt=""></a>
             </div>

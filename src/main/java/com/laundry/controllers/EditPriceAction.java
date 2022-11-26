@@ -25,10 +25,9 @@ public class EditPriceAction extends HttpServlet {
         priceChart.setTypeOfCloth(typeOfCloth);
         priceChart.setPrice(price);
         priceChart = priceChartRepo.update(priceChart);
-        if(priceChart != null){
-            req.getSession().setAttribute("success", "Price updated successfully");
-        }
-        else{
+        if (priceChart != null) {
+            req.getSession().setAttribute("success", priceChart.getTypeOfCloth() +"'s Price updated successfully");
+        } else {
             req.getSession().setAttribute("error", "Could not update, try again");
         }
         resp.sendRedirect("admin-dashboard.jsp");

@@ -17,6 +17,16 @@
 
 <body>
     <div class="main-form">
+        <%
+            if (session.getAttribute("error") != null) {
+                out.print("<p style='margin-top:20px; font-size: large; color: red;'>"+session.getAttribute("error")+"</p>");
+                session.removeAttribute("error");
+            }
+            if (session.getAttribute("success") != null) {
+                out.print("<p style='margin-top:20px; font-size: large; color: green;'>"+session.getAttribute("success")+"</p>");
+                session.removeAttribute("success");
+            }
+        %>
         <h2>User Login to LMS</h2>
         <form action="user-login" method="post">
             <div class="form-input">

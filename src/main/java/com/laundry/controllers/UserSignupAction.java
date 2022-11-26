@@ -30,6 +30,7 @@ public class UserSignupAction extends HttpServlet {
         user = userRepo.create(user);
         if(user != null){
             req.getSession().setAttribute("user", user);
+            req.getSession().setAttribute("success", "Registered Successfully");
             resp.sendRedirect("user-dashboard.jsp");
         }
         else{

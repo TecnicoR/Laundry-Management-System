@@ -83,9 +83,14 @@ body {
     align-items: center;
     justify-content: space-between;
 }
+.extra-links a{
+    /* text-decoration: none; */
+    color: blue;
+}
 .login-as-staff{
     margin-top: 10px;
     font-size: small;
+    /* text-decoration: none; */
 }
 h2{
     margin-top: 20px;
