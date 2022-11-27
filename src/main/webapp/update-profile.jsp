@@ -44,7 +44,7 @@
 
         </form>
         <div class="extra-links">
-            <a href="./login.jsp">already registered? login</a>
+            <a href="./user-dashboard.jsp.jsp">Go back to dashboard</a>
         </div>
     </div>
 </body>
