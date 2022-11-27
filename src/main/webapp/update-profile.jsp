@@ -44,7 +44,7 @@
 
         </form>
         <div class="extra-links">
-            <a href="./user-dashboard.jsp.jsp">Go back to dashboard</a>
+            <a href="./user-dashboard.jsp">Go back to dashboard</a>
         </div>
     </div>
 </body>
